@@ -18,7 +18,7 @@ jobs:
         mkdir -p ~/.ssh
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/tes_server_polindra
         chmod 600 ~/.ssh/tes_server_polindra
-        ssh-keyscan -p 8022 -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
+        ssh-keyscan -p 8022 -H 103.174.237.194 >> ~/.ssh/known_hosts
 
     - name: Deploy to Server
       run: |
