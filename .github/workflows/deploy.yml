@@ -16,13 +16,10 @@ jobs:
     - name: Setup SSH
       run: |
         mkdir -p ~/.ssh
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        printf "%s" "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-    
-        echo "=== DEBUG FILE ==="
-        ls -la ~/.ssh
-        echo "=== ISI KEY (HEAD) ==="
-        head -n 3 ~/.ssh/id_rsa
+
+        ssh-keyscan -p 8022 -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
 
     - name: Deploy to Server
       run: |
